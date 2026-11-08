@@ -12,7 +12,9 @@ export default defineConfig(({ mode }) => {
   const emitSourcemaps = mode === "development";
 
   return {
-    base: process.env.FIGMA_PUBLIC_URL ? `${process.env.FIGMA_PUBLIC_URL}/` : "/",
+    base: process.env.FIGMA_PUBLIC_URL
+      ? `${process.env.FIGMA_PUBLIC_URL}/`
+      : "/",
     build: {
       sourcemap: emitSourcemaps ? "inline" : false,
       minify: !emitSourcemaps,
@@ -79,9 +81,16 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
     return value?.replace(/[^a-zA-Z0-9_-]/g, "") || "";
   }
   function escapeHtmlText(value: string): string {
-    return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
   }
-  function replaceHtmlCommentSlot(html: string, slotName: string, content: string): string {
+  function replaceHtmlCommentSlot(
+    html: string,
+    slotName: string,
+    content: string,
+  ): string {
     return html.replace(`<!-- ${slotName} -->`, content);
   }
 
@@ -89,21 +98,25 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
   const description = config.description ?? "";
   // Imported HTML keeps its own favicon. New Makes use PNG because Google Search does not
   // support SVG favicons, even though browsers do.
-  const favicon = config.icons?.icon ?? "/favicon.png";
+  const favicon = config.icons?.icon ?? "/favicon.ico";
   const socialImage = config.openGraph?.image ?? "";
   const language = sanitizeHtmlValue(config.language) || "en";
-  const googleAnalyticsId = sanitizeHtmlValue(config.analytics?.googleAnalyticsId);
+  const googleAnalyticsId = sanitizeHtmlValue(
+    config.analytics?.googleAnalyticsId,
+  );
   const headStart = config.customScripts?.headStart ?? "";
   const headEnd = config.customScripts?.headEnd ?? "";
   const bodyStart = config.customScripts?.bodyStart ?? "";
   const bodyEnd = config.customScripts?.bodyEnd ?? "";
-  const robotsTxt = config.robots?.index === false ? "User-agent: *\nDisallow: /\n" : "";
+  const robotsTxt =
+    config.robots?.index === false ? "User-agent: *\nDisallow: /\n" : "";
 
   return {
     name: "figma-site-configuration",
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        if (!robotsTxt || req.url?.split("?")[0] !== "/robots.txt") return next();
+        if (!robotsTxt || req.url?.split("?")[0] !== "/robots.txt")
+          return next();
 
         res.setHeader("Content-Type", "text/plain; charset=utf-8");
         res.end(robotsTxt);
@@ -123,7 +136,11 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
       handler(html) {
         let result = html;
         result = replaceHtmlCommentSlot(result, "figma:lang", language);
-        result = replaceHtmlCommentSlot(result, "figma:title", escapeHtmlText(title));
+        result = replaceHtmlCommentSlot(
+          result,
+          "figma:title",
+          escapeHtmlText(title),
+        );
         result = replaceHtmlCommentSlot(result, "figma:head-start", headStart);
         result = replaceHtmlCommentSlot(result, "figma:head-end", headEnd);
         result = replaceHtmlCommentSlot(result, "figma:body-start", bodyStart);
@@ -145,7 +162,11 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
           });
         }
         if (favicon) {
-          tags.push({ tag: "link", attrs: { rel: "icon", href: favicon }, injectTo: "head" });
+          tags.push({
+            tag: "link",
+            attrs: { rel: "icon", href: favicon },
+            injectTo: "head",
+          });
         }
         if (title) {
           tags.push({
@@ -266,7 +287,9 @@ function figmaErrorOverlayReplay(): Plugin {
     configureServer(server) {
       let lastError: object | null = null;
 
-      const origSend = server.ws.send.bind(server.ws) as (...args: any[]) => void;
+      const origSend = server.ws.send.bind(server.ws) as (
+        ...args: any[]
+      ) => void;
       server.ws.send = ((...args: any[]) => {
         const payload = args[0];
         if (payload && typeof payload === "object" && !Array.isArray(payload)) {
@@ -328,7 +351,12 @@ function figmaReactRefreshBoundaryFallback(): Plugin {
         if (moduleId && lostRefreshBoundaries.has(moduleId)) {
           const invalidated = new Set<ModuleNode>();
           for (const updatedModule of modules) {
-            server.moduleGraph.invalidateModule(updatedModule, invalidated, timestamp, true);
+            server.moduleGraph.invalidateModule(
+              updatedModule,
+              invalidated,
+              timestamp,
+              true,
+            );
           }
           sendFullReload?.();
           return [];
@@ -338,10 +366,13 @@ function figmaReactRefreshBoundaryFallback(): Plugin {
       }
     },
     transform(code, id) {
-      if (!/\.[jt]sx?(?:\?|$)/.test(id) || id.includes("/node_modules/")) return null;
+      if (!/\.[jt]sx?(?:\?|$)/.test(id) || id.includes("/node_modules/"))
+        return null;
 
       const moduleId = id.split("?")[0] ?? id;
-      const hasRefreshBoundary = code.includes("registerExportsForReactRefresh");
+      const hasRefreshBoundary = code.includes(
+        "registerExportsForReactRefresh",
+      );
       const previousHadRefreshBoundary = hadRefreshBoundary.get(moduleId);
       hadRefreshBoundary.set(moduleId, hasRefreshBoundary);
 
@@ -367,7 +398,9 @@ function figmaReactRefreshBoundaryFallback(): Plugin {
  * builds (`vite build`) skip it entirely so the route doesn't leak
  * into shipped bundles.
  */
-function figmaMakeKitPlugin(options: { storiesGlob: string | string[] }): Plugin {
+function figmaMakeKitPlugin(options: {
+  storiesGlob: string | string[];
+}): Plugin {
   const storiesGlob = Array.isArray(options.storiesGlob)
     ? options.storiesGlob
     : [options.storiesGlob];
@@ -425,7 +458,9 @@ function figmaMakeKitPlugin(options: { storiesGlob: string | string[] }): Plugin
  * path, such as `libraries/<name>/`.
  */
 function figmaLinkedPackageSourcemaps(): Plugin {
-  const packageJson = JSON.parse(fs.readFileSync(path.resolve(__dirname, "package.json"), "utf8"));
+  const packageJson = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, "package.json"), "utf8"),
+  );
   const linkedPackages = Object.keys({
     ...packageJson.dependencies,
     ...packageJson.devDependencies,
@@ -433,7 +468,9 @@ function figmaLinkedPackageSourcemaps(): Plugin {
     const installedDir = path.resolve(__dirname, "node_modules", name);
     try {
       const realDir = fs.realpathSync(installedDir);
-      return realDir.split(path.sep).includes("node_modules") ? [] : [{ installedDir, realDir }];
+      return realDir.split(path.sep).includes("node_modules")
+        ? []
+        : [{ installedDir, realDir }];
     } catch {
       return [];
     }
@@ -441,8 +478,13 @@ function figmaLinkedPackageSourcemaps(): Plugin {
   const sourceMappingUrl = /\/\/# sourceMappingURL=(\S+)\s*$/;
 
   function installedPath(file: string) {
-    const linked = linkedPackages.find(({ realDir }) => file.startsWith(realDir + path.sep));
-    return linked && path.join(linked.installedDir, path.relative(linked.realDir, file));
+    const linked = linkedPackages.find(({ realDir }) =>
+      file.startsWith(realDir + path.sep),
+    );
+    return (
+      linked &&
+      path.join(linked.installedDir, path.relative(linked.realDir, file))
+    );
   }
   function readSourceMap(file: string, code: string) {
     const url = sourceMappingUrl.exec(code)?.[1];
@@ -455,7 +497,10 @@ function figmaLinkedPackageSourcemaps(): Plugin {
       }
       if (url) {
         const mapFile = path.resolve(path.dirname(file), url);
-        return { map: JSON.parse(fs.readFileSync(mapFile, "utf8")), mapDir: path.dirname(mapFile) };
+        return {
+          map: JSON.parse(fs.readFileSync(mapFile, "utf8")),
+          mapDir: path.dirname(mapFile),
+        };
       }
     } catch {}
     // Without a usable input map, map every line to itself.
@@ -475,7 +520,8 @@ function figmaLinkedPackageSourcemaps(): Plugin {
     enforce: "pre",
     load(id) {
       // Leave queried imports such as ?raw and ?url to Vite's own loaders.
-      if (id.includes("?") || !/\.[cm]?[jt]sx?$/.test(id) || !installedPath(id)) return null;
+      if (id.includes("?") || !/\.[cm]?[jt]sx?$/.test(id) || !installedPath(id))
+        return null;
 
       const code = fs.readFileSync(id, "utf8");
       const { map, mapDir } = readSourceMap(id, code);
