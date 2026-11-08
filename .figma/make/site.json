@@ -1,0 +1,10 @@
+{
+  "description": "Provides a web-based version of the referenced screen, helping users access its content and features online.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
