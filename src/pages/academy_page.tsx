@@ -1,5 +1,6 @@
 import SharedFooter from "@/components/shared_footer";
 import SharedHeader from "@/components/shared_header";
+import { academy } from "@/path";
 import { useState } from "react";
 
 function AcademyPage() {
@@ -59,7 +60,7 @@ function AcademyPage() {
   }
   return (
     <div className="min-h-screen bg-[#faf9f6] text-[#302721]">
-      <SharedHeader active="/academy" />
+      <SharedHeader active={academy} />
       <main>
         <section className="mx-auto max-w-[1440px] px-6 pb-10 pt-20 md:px-12 lg:px-20">
           <h1 className="mt-6 font-serif text-[25px]">반려가족 수업</h1>

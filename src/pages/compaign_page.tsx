@@ -1,12 +1,13 @@
 import Arrow from "@/components/arrow";
 import SharedFooter from "@/components/shared_footer";
 import SharedHeader from "@/components/shared_header";
+import { campaign, consultation } from "@/path";
 import { Link } from "react-router";
 
 function CampaignPage() {
   return (
     <div className="min-h-screen bg-[#faf9f6] text-[#302721]">
-      <SharedHeader active="/campaign" />
+      <SharedHeader active={campaign} />
       <main>
         <section className="mx-auto max-w-[1440px] px-6 py-20 md:px-12 lg:px-20">
           <p className="section-label">캠페인 소개</p>
@@ -62,7 +63,7 @@ function CampaignPage() {
                       {text}
                     </p>
                     <Link
-                      to="/consultation"
+                      to={consultation}
                       className="mt-7 flex justify-between border-t border-[#e6e1da] pt-5 text-[10px]"
                     >
                       상세보기 및 신청 <Arrow />

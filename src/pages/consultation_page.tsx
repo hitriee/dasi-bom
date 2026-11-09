@@ -1,5 +1,6 @@
 import SharedFooter from "@/components/shared_footer";
 import SharedHeader from "@/components/shared_header";
+import { consultation } from "@/path";
 import { useState } from "react";
 
 function ConsultationPage() {
@@ -25,7 +26,7 @@ function ConsultationPage() {
   ];
   return (
     <div className="bg-[#faf9f6] text-[#302721]">
-      <SharedHeader active="/consultation" />
+      <SharedHeader active={consultation} />
       <main>
         <section className="mx-auto max-w-[1440px] px-6 pb-16 pt-20 md:px-12 lg:px-20">
           <p className="section-label">상담 안내</p>
