@@ -1,6 +1,7 @@
 import Arrow from "@/components/arrow";
 import SharedFooter from "@/components/shared_footer";
 import SharedHeader from "@/components/shared_header";
+import { Link } from "react-router";
 
 function CampaignPage() {
   return (
@@ -60,12 +61,12 @@ function CampaignPage() {
                     <p className="mt-4 text-[11px] leading-6 text-[#786f68]">
                       {text}
                     </p>
-                    <a
-                      href="/consultation"
+                    <Link
+                      to="/consultation"
                       className="mt-7 flex justify-between border-t border-[#e6e1da] pt-5 text-[10px]"
                     >
                       상세보기 및 신청 <Arrow />
-                    </a>
+                    </Link>
                   </div>
                 </article>
               ))}

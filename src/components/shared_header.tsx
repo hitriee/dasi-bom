@@ -1,13 +1,14 @@
 import { navItems } from "@/path";
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Link } from "react-router";
 
 function SharedHeader({ active = "" }: { active?: string }) {
   const [open, setOpen] = useState(false);
   return (
     <header className="relative z-50 border-b border-[#e7e3dc] bg-[#faf9f6] sticky top-0">
       <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-6 md:px-12 lg:px-20">
-        <a href="/" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <span
             className="grid size-10 place-items-center 
           
@@ -25,12 +26,12 @@ function SharedHeader({ active = "" }: { active?: string }) {
               alt="몰리스 로고"
             />
           </span>
-        </a>
+        </Link>
         <nav className="hidden items-center gap-10 text-[12px] md:flex">
           {navItems.map(([label, href]) => (
-            <a
+            <Link
               key={href}
-              href={href}
+              to={href}
               className={
                 active === href
                   ? "bg-[#2d2520] px-5 py-2.5 text-white"
@@ -38,7 +39,7 @@ function SharedHeader({ active = "" }: { active?: string }) {
               }
             >
               {label}
-            </a>
+            </Link>
           ))}
         </nav>
         <button
@@ -53,13 +54,13 @@ function SharedHeader({ active = "" }: { active?: string }) {
       {open && (
         <nav className="absolute inset-x-0 top-full bg-[#faf9f6] px-6 py-4 shadow md:hidden">
           {navItems.map(([label, href]) => (
-            <a
+            <Link
               key={href}
-              href={href}
+              to={href}
               className="block border-b border-[#e7e3dc] py-4 text-sm last:border-0"
             >
               {label}
-            </a>
+            </Link>
           ))}
         </nav>
       )}

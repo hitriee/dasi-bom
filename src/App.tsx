@@ -8,6 +8,7 @@ import Story from "./components/story";
 import { academy, campaign, consultation, dashboard, navItems } from "./path";
 import SharedFooter from "./components/shared_footer";
 import SharedHeader from "./components/shared_header";
+import { Link } from "react-router";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,18 +44,18 @@ export default function App() {
                 “모든 만남이 다시 봄이 되도록.”
               </p> */}
               <div className="mt-10 flex flex-wrap gap-3">
-                <a
-                  href="#campaign"
+                <Link
+                  to="#campaign"
                   className="inline-flex items-center gap-8 bg-white px-6 py-4 text-[12px] text-[#302721] transition hover:bg-[#e8ddcd]"
                 >
                   캠페인 참여하기 <Arrow />
-                </a>
-                <a
-                  href="#stories"
+                </Link>
+                <Link
+                  to="#stories"
                   className="inline-flex items-center gap-8 border border-white/45 px-6 py-4 text-[12px] transition hover:bg-white/10"
                 >
                   입양 이야기 보기 <Arrow light />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -76,12 +77,12 @@ export default function App() {
                 다시 따스한 일상에서 미소 지을 수 있도록 여러분의 따뜻한 시선과
                 손길을 기다립니다.
               </p>
-              <a
-                href="#services"
+              <Link
+                to="#services"
                 className="mt-9 inline-flex items-center gap-8 bg-[#2d2520] px-6 py-4 text-[12px] text-white"
               >
                 더 알아보기 <Arrow light />
-              </a>
+              </Link>
             </div>
             <img
               src="/assets/with-you.jpg"
@@ -122,12 +123,12 @@ export default function App() {
               />
             </div>
             <div className="mt-12 text-center">
-              <a
-                href="#services"
+              <Link
+                to="#services"
                 className="inline-flex items-center gap-7 border border-[#bdb6ae] bg-[#faf9f6] px-6 py-3.5 text-[12px]"
               >
                 더 많은 입양 이야기 보기 <Arrow />
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -172,12 +173,12 @@ export default function App() {
                   <p className="mt-5 text-[13px] leading-7 text-[#756b63]">
                     {description}
                   </p>
-                  <a
-                    href="#footer"
+                  <Link
+                    to="#footer"
                     className="mt-auto inline-flex items-center gap-2 pt-8 text-[11px] text-[#ae5c48]"
                   >
                     {link} <Arrow />
-                  </a>
+                  </Link>
                 </article>
               ))}
             </div>
@@ -193,12 +194,12 @@ export default function App() {
               지금 ‘다시 봄’ 캠페인에 동참하여 <br /> 유기견들에게
               <br className="hidden md:block" /> 따뜻한 내일을 선물해 주세요.
             </h2>
-            <a
-              href="#top"
+            <Link
+              to="#top"
               className="mt-10 inline-flex items-center gap-8 bg-white px-7 py-4 text-[12px] text-[#2b221e]"
             >
               다시 봄 캠페인 참여하기 <Arrow />
-            </a>
+            </Link>
           </div>
         </section>
       </main>

@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import fs from "node:fs";
 import path from "node:path";
 
-import siteConfiguration from "./.figma/make/site.json";
+import siteConfiguration from "./.figma/make/site.json" with { type: "json" };
 
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -26,11 +26,11 @@ export default defineConfig(({ mode }) => {
       figmaErrorOverlayReplay(),
       figmaReactRefreshBoundaryFallback(),
       figmaMakeKitPlugin({ storiesGlob: "/src/**/*.stories.{ts,tsx,js,jsx}" }),
-      figmaLinkedPackageSourcemaps(),
+      figmalinkedPackageSourcemaps(),
     ],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        "@": path.resolve(import.meta.dirname, "./src"),
       },
     },
     server: {
@@ -71,7 +71,7 @@ type FigmaSiteConfiguration = {
     bodyEnd?: string;
   };
   accessibility?: {
-    addBypassLinks?: boolean;
+    addBypasslinks?: boolean;
   };
 };
 
@@ -225,7 +225,7 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
           );
         }
 
-        if (config.accessibility?.addBypassLinks) {
+        if (config.accessibility?.addBypasslinks) {
           tags.push(
             {
               tag: "style",
@@ -457,15 +457,19 @@ function figmaMakeKitPlugin(options: {
  * installed packages appear in sourcemaps. Vite otherwise reports their real
  * path, such as `libraries/<name>/`.
  */
-function figmaLinkedPackageSourcemaps(): Plugin {
+function figmalinkedPackageSourcemaps(): Plugin {
   const packageJson = JSON.parse(
-    fs.readFileSync(path.resolve(__dirname, "package.json"), "utf8"),
+    fs.readFileSync(path.resolve(import.meta.dirname, "package.json"), "utf8"),
   );
   const linkedPackages = Object.keys({
     ...packageJson.dependencies,
     ...packageJson.devDependencies,
   }).flatMap((name) => {
-    const installedDir = path.resolve(__dirname, "node_modules", name);
+    const installedDir = path.resolve(
+      import.meta.dirname,
+      "node_modules",
+      name,
+    );
     try {
       const realDir = fs.realpathSync(installedDir);
       return realDir.split(path.sep).includes("node_modules")
