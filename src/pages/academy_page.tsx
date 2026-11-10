@@ -1,6 +1,6 @@
 import SharedFooter from "@/components/shared_footer";
-import SharedHeader from "@/components/shared_header";
-import { academy } from "@/path";
+import SharedHeader from "@/components/shared_nav";
+import { academy } from "@/utils/path";
 import { useState } from "react";
 
 function AcademyPage() {

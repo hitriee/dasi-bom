@@ -37,9 +37,9 @@
 
 @font-face {
   font-family: "SeoyoonFont";
-  src: url("../public/fonts/이서윤체.ttf");
+  src: url("/public/fonts/Seoyoon.ttf");
 }
-@font-face {
+/* @font-face {
   font-family: "AhyoungFont";
   src: url("../public/fonts/Griun_AhyoungsHandwriteIn2019-Rg.ttf");
 }
@@ -50,7 +50,7 @@
 @font-face {
   font-family: "SarangFont";
   src: url("../public/fonts/GriunXHangeul_SarangSeuReoUn-Rg.ttf");
-}
+} */
 
 @layer components {
   .section-label {

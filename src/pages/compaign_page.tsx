@@ -1,7 +1,7 @@
 import Arrow from "@/components/arrow";
 import SharedFooter from "@/components/shared_footer";
-import SharedHeader from "@/components/shared_header";
-import { campaign, consultation } from "@/path";
+import SharedHeader from "@/components/shared_nav";
+import { campaign, consultation } from "@/utils/path";
 import { Link } from "react-router";
 
 function CampaignPage() {

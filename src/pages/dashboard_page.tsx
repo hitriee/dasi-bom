@@ -1,7 +1,7 @@
 import CourseStatus from "@/components/course_status";
 import SharedFooter from "@/components/shared_footer";
-import SharedHeader from "@/components/shared_header";
-import { dashboard } from "@/path";
+import SharedHeader from "@/components/shared_nav";
+import { dashboard } from "@/utils/path";
 
 function DashboardPage() {
   return (

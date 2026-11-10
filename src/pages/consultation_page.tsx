@@ -1,6 +1,7 @@
 import SharedFooter from "@/components/shared_footer";
 import SharedHeader from "@/components/shared_header";
-import { consultation } from "@/path";
+import SharedNav from "@/components/shared_nav";
+import { consultation } from "@/utils/path";
 import { useState } from "react";
 
 function ConsultationPage() {
@@ -26,16 +27,14 @@ function ConsultationPage() {
   ];
   return (
     <div className="bg-[#faf9f6] text-[#302721]">
-      <SharedHeader active={consultation} />
+      <SharedNav active={consultation} />
       <main>
         <section className="mx-auto max-w-[1440px] px-6 pb-16 pt-20 md:px-12 lg:px-20">
-          <p className="section-label">상담 안내</p>
-          <h1 className="mt-4 font-serif text-[48px] tracking-[-0.05em]">
-            입양 상담
-          </h1>
-          <p className="mt-3 text-[13px] text-[#756b63]">
-            가족이 된다는 일은 새로운 시작을 준비하는 일입니다.
-          </p>
+          <SharedHeader
+            sub_title="상담 안내"
+            title="입양 상담"
+            explain="가족이 된다는 일은 새로운 시작을 준비하는 일입니다."
+          />
           <div className="mt-20 grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
             <div>
               <p className="text-[10px] text-[#a85b49]">
