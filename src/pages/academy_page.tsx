@@ -1,5 +1,6 @@
 import SharedFooter from "@/components/shared_footer";
-import SharedHeader from "@/components/shared_nav";
+import SharedNav from "@/components/shared_nav";
+import SharedHeader from "@/components/shared_header";
 import { academy } from "@/utils/path";
 import { useState } from "react";
 
@@ -22,7 +23,7 @@ function AcademyPage() {
       "실습 중심",
     ],
     [
-      "/assets/dog-walk.jpg",
+      "/assets/dog-outside.png",
       "STEP 03",
       "주거 환경 조성과 사회화",
       "반려견이 스트레스 받지 않는 안전한 공간과 산책, 외부 자극에 대한 올바른 사회화 방법을 배웁니다.",
@@ -38,7 +39,7 @@ function AcademyPage() {
       "1:1 맞춤",
     ],
     [
-      "/assets/dog-walk.jpg",
+      "/assets/dog-outside.png",
       "PROGRAM 02",
       "산책 매너와 사회화 클래스",
       "리드줄 당김과 외부 자극에 대한 반응을 낮추고, 보호자와 보폭을 맞춰 안정적으로 걷는 방법을 실습합니다.",
@@ -60,15 +61,22 @@ function AcademyPage() {
   }
   return (
     <div className="min-h-screen bg-[#faf9f6] text-[#302721]">
-      <SharedHeader active={academy} />
+      <SharedNav active={academy} />
       <main>
         <section className="mx-auto max-w-[1440px] px-6 pb-10 pt-20 md:px-12 lg:px-20">
-          <h1 className="mt-6 font-serif text-[25px]">반려가족 수업</h1>
+          <SharedHeader
+            sub_title="교육 안내"
+            title="반려가족 수업"
+            explain={`보호자 필수
+            교육 과정을 이수하고 반려견과 함께 성장하는 전문 프로그램을
+            만나보세요.`}
+          />
+          {/* <h1 className="mt-6 font-serif text-[25px]">반려가족 수업</h1>
           <p className="mt-4 max-w-[850px] font-serif text-[18px] leading-8">
             올바른 지식과 교감으로 행복한 동행을 시작하세요. <br /> 보호자 필수
             교육 과정을 이수하고 반려견과 함께 성장하는 전문 프로그램을
             만나보세요.
-          </p>
+          </p> */}
           <div className="mt-12 flex gap-10 border-b border-[#e5e0d9] text-[13px]">
             <button
               className={`pb-4 ${tab === "guardian" ? "border-b-2 border-[#c47b67] text-[#302721]" : "text-[#827970]"}`}

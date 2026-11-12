@@ -14,15 +14,19 @@ function SharedNav({ active = "" }: { active?: string }) {
           
            font-serif text-[10px]"
           >
-            <img src="/assets/logo-dasi-bom.png" alt="다시 봄 로고" />
+            <img
+              src="/assets/logo-re-bom.png"
+              alt="다시 봄 로고"
+              className="max-h-7"
+            />
           </span>
 
-          <span className="dasi-bom text-[18px]">다시, 봄</span>
-          <span className="dasi-bom text-[12px]">by</span>
+          <span className="re-bom text-[18px]">다시, 봄</span>
+          <span className="re-bom text-[12px]">by</span>
           <span className="text-[10px]">
             <img
               src="/assets/logo-mollys-black.png"
-              className="max-h-2"
+              className="max-h-3"
               alt="몰리스 로고"
             />
           </span>

@@ -8,13 +8,13 @@ import {
   navItems,
 } from "../utils/path";
 import SharedFooter from "../components/shared_footer";
-import SharedHeader from "../components/shared_nav";
+import SharedNav from "../components/shared_nav";
 import { Link } from "react-router";
 
 export default function IndexPage() {
   return (
     <div className="bg-[#f8f7f3] text-[#302721]">
-      <SharedHeader />
+      <SharedNav />
       <main id="top">
         <section className="relative isolate min-h-[590px] overflow-hidden text-white lg:min-h-[660px]">
           <img
@@ -25,9 +25,16 @@ export default function IndexPage() {
           <div className="absolute inset-0 bg-[#241c18]/72" />
           <div className="relative mx-auto flex min-h-[590px] max-w-[1440px] items-center px-6 py-20 md:px-12 lg:min-h-[660px] lg:px-20">
             <div className="max-w-[680px]">
-              <h1 className="dasi-bom mt-8 text-[30px] tracking-[0.16em] text-white/75 text-bold">
-                다시, 봄
-              </h1>
+              <div className="flex gap-3">
+                <h1 className="re-bom text-[30px] tracking-[0.16em] text-white/75 text-bold">
+                  다시, 봄
+                </h1>
+                <img
+                  src="/assets/logo-re-bom-white.png"
+                  alt="다시 봄 로고"
+                  className="max-h-9"
+                />
+              </div>
               <h2 className="mt-7 font-serif text-[20px] leading-[1.75] tracking-[-0.03em] md:text-[35px]">
                 1. 유기견을 다른 시각으로 바라봄
                 <br />
@@ -40,12 +47,6 @@ export default function IndexPage() {
                   className="inline-flex items-center gap-8 bg-white px-6 py-4 text-[12px] text-[#302721] transition hover:bg-[#e8ddcd]"
                 >
                   캠페인 참여하기 <Arrow />
-                </Link>
-                <Link
-                  to="#stories"
-                  className="inline-flex items-center gap-8 border border-white/45 px-6 py-4 text-[12px] transition hover:bg-white/10"
-                >
-                  입양 이야기 보기 <Arrow light />
                 </Link>
               </div>
             </div>
@@ -113,14 +114,6 @@ export default function IndexPage() {
                 position="object-[center_58%]"
               />
             </div>
-            <div className="mt-12 text-center">
-              <Link
-                to="#services"
-                className="inline-flex items-center gap-7 border border-[#bdb6ae] bg-[#faf9f6] px-6 py-3.5 text-[12px]"
-              >
-                더 많은 입양 이야기 보기 <Arrow />
-              </Link>
-            </div>
           </div>
         </section>
 
@@ -141,20 +134,23 @@ export default function IndexPage() {
                   "입양 상담",
                   "새로운 가족을 기다리는 아이들의 현재 상태와 성향, 입양가정 환경을 상담해 드립니다.",
                   "입양 상담 확인하기",
+                  consultation,
                 ],
                 [
                   "02",
                   "보호자 교육",
                   "처음 만나는 반려생활, 올바른 시작을 함께합니다. 책임감 있는 보호자가 되기 위한 필수 가이드.",
                   "보호자 교육 알아보기",
+                  academy,
                 ],
                 [
                   "03",
                   "반려견 교육",
                   "반려견을 이해하고 함께 살아가기 위한 교육을 준비했어요. 건강한 일상을 시작해 보세요.",
                   "반려견 교육 알아보기",
+                  academy,
                 ],
-              ].map(([number, title, description, link]) => (
+              ].map(([number, title, description, link, url]) => (
                 <article
                   key={number}
                   className="flex min-h-[300px] flex-col bg-[#f4f2ed] p-8 lg:p-10"
@@ -165,7 +161,7 @@ export default function IndexPage() {
                     {description}
                   </p>
                   <Link
-                    to="#footer"
+                    to={url}
                     className="mt-auto inline-flex items-center gap-2 pt-8 text-[11px] text-[#ae5c48]"
                   >
                     {link} <Arrow />

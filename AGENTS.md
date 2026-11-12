@@ -1,4 +1,4 @@
-# dasi-bom
+# re-bom
 
 React + Vite + Tailwind CSS project running inside Figma Make.
 

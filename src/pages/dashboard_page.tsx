@@ -1,12 +1,12 @@
 import CourseStatus from "@/components/course_status";
 import SharedFooter from "@/components/shared_footer";
-import SharedHeader from "@/components/shared_nav";
+import SharedNav from "@/components/shared_nav";
 import { dashboard } from "@/utils/path";
 
 function DashboardPage() {
   return (
     <div className="min-h-screen bg-[#f7f6f2] text-[#302721]">
-      <SharedHeader active={dashboard} />
+      <SharedNav active={dashboard} />
       <main className="mx-auto max-w-[1440px] px-6 py-16 md:px-12 lg:px-20">
         <section className="flex flex-col gap-6 border-b border-[#e4dfd8] pb-14 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-6">

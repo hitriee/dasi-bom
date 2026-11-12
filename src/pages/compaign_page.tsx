@@ -1,20 +1,22 @@
 import Arrow from "@/components/arrow";
 import SharedFooter from "@/components/shared_footer";
-import SharedHeader from "@/components/shared_nav";
+import SharedHeader from "@/components/shared_header";
+import SharedNav from "@/components/shared_nav";
 import { campaign, consultation } from "@/utils/path";
 import { Link } from "react-router";
 
 function CampaignPage() {
   return (
     <div className="min-h-screen bg-[#faf9f6] text-[#302721]">
-      <SharedHeader active={campaign} />
+      <SharedNav active={campaign} />
       <main>
         <section className="mx-auto max-w-[1440px] px-6 py-20 md:px-12 lg:px-20">
-          <p className="section-label">캠페인 소개</p>
-          <h1 className="mt-5 font-serif text-[28px]">다시 봄 캠페인</h1>
-          <p className="mt-4 font-serif text-[16px]">
-            유기견에게 새로운 가족과 따뜻한 봄날을 전합니다.
-          </p>
+          <SharedHeader
+            sub_title="캠페인 소개"
+            title="다시 봄 캠페인"
+            explain="유기견에게 새로운 가족과 따뜻한 봄날을 전합니다."
+          />
+
           <p className="mt-7 max-w-[980px] text-[13px] leading-7 text-[#71675f]">
             ‘다시 봄’은 주변 보호소의 기다림이 길고 따뜻한 사람의 손길이 필요한
             <br />
