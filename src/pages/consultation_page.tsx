@@ -98,9 +98,6 @@ function ConsultationPage() {
                   <p className="mt-4 text-[11px] leading-6 text-[#827870]">
                     {text}
                   </p>
-                  <span className="mt-7 block text-[10px] text-[#b56854]">
-                    자세히 보기
-                  </span>
                 </article>
               ))}
             </div>

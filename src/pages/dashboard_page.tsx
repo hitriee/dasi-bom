@@ -25,9 +25,6 @@ function DashboardPage() {
               </p>
             </div>
           </div>
-          <button className="border border-[#dcd6cf] bg-[#efede8] px-5 py-3 text-[11px]">
-            프로필 페이지 보기
-          </button>
         </section>
         <section className="grid gap-5 py-14 md:grid-cols-3">
           {[
